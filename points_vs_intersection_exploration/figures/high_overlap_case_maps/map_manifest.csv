@@ -1,0 +1,6 @@
+year,tract_id,cbsa_code,cbsa_title,overlap_pct,rep_distance_to_cbsa_m,map_path
+1980,G34002900139,35620,"New York-Newark-Jersey City, NY-NJ-PA",83.3449009069778,32.49405053345704,points_vs_intersection_exploration/figures/high_overlap_case_maps/1980_G34002900139_35620_old_metro_map.png
+1970,G36006100289,35620,"New York-Newark-Jersey City, NY-NJ-PA",93.86804054297674,29.200792156823425,points_vs_intersection_exploration/figures/high_overlap_case_maps/1970_G36006100289_35620_old_metro_map.png
+1970,G36008100972,35620,"New York-Newark-Jersey City, NY-NJ-PA",88.35769080893039,74.64016628454792,points_vs_intersection_exploration/figures/high_overlap_case_maps/1970_G36008100972_35620_old_metro_map.png
+1980,G36008100972,35620,"New York-Newark-Jersey City, NY-NJ-PA",88.35769080893039,74.64016628454792,points_vs_intersection_exploration/figures/high_overlap_case_maps/1980_G36008100972_35620_old_metro_map.png
+1990,G36008100972,35620,"New York-Newark-Jersey City, NY-NJ-PA",88.35769080893039,74.64016628454792,points_vs_intersection_exploration/figures/high_overlap_case_maps/1990_G36008100972_35620_old_metro_map.png

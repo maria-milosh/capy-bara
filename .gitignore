@@ -130,6 +130,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.vscode/
 
 # Spyder project settings
 .spyderproject
@@ -172,3 +173,5 @@ cython_debug/
 /figures/
 /new-york-swaps/
 /outputs/
+/old_cbsas/
+/1970_overlap_tests/
