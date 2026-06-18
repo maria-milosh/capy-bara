@@ -2,7 +2,7 @@
 
 Generated from the March 2020 CBSA definition shapefiles in `cbsas/defs/` and the tract geometry files in `processed/1970_tracts.shp` and `processed/1980_tracts.shp`.
 
-Puerto Rico metros are excluded from this report because Puerto Rico doesn't get tracts until 2000. There are 8 Puerto Rico March 2020 metros in `cbsas/defs/`; after dropping them, the comparison covers 384 metro areas.
+Puerto Rico metros are included in this report. The comparison covers all 392 March 2020 metro areas in `cbsas/defs/`.
 
 Coverage is measured as area coverage:
 
@@ -16,23 +16,23 @@ The coverage metric is metro-level. When this report says "0% coverage" or "belo
 
 ## Main numbers
 
-Using a 90% area-coverage cutoff, only 30% of metro areas (according to the 2020 definition) are close to being fully covered in 1970. 11% of metro areas are not covered at all. I'm using a thresholf of 90% coverage to account for small mismatches between tracts and metro areas that we've encountered while working with these data.
+Using a 90% area-coverage cutoff, only 29% of metro areas (according to the 2020 definition) are close to being fully covered in 1970. 13% of metro areas are not covered at all. I'm using a threshold of 90% coverage to account for small mismatches between tracts and metro areas that we've encountered while working with these data.
 
 1980 tracts cover far more metro areas than 1970 tracts. The most important counts are:
 
 | tract year | metros with 0% coverage | metros below 90% coverage | metros at least 90% covered |
 |---:|---:|---:|---:|
-| 1970 | 43 of 384 (11.2%) | 269 of 384 (70.1%) | 115 of 384 (29.9%) |
-| 1980 | 0 of 384 (0.0%) | 151 of 384 (39.3%) | 233 of 384 (60.7%) |
+| 1970 | 51 of 392 (13.0%) | 277 of 392 (70.7%) | 115 of 392 (29.3%) |
+| 1980 | 8 of 392 (2.0%) | 159 of 392 (40.6%) | 233 of 392 (59.4%) |
 
-So, after removing Puerto Rico, 1970 still has 43 metro areas with no tract coverage at all and 269 metro areas that do not clear the 90% threshold. By 1980, no non-Puerto Rico metros have exactly 0% coverage, but 151 still do not clear the 90% threshold.
+With Puerto Rico included, 1970 has 51 metro areas with no tract coverage at all and 277 metro areas that do not clear the 90% threshold. By 1980, 8 metro areas still have exactly 0% coverage, all in Puerto Rico, and 159 metros still do not clear the 90% threshold.
 
 | tract year | tract geometries loaded | metros checked | metros >=90% covered | metros <90% covered | metros with 0% coverage | median coverage | mean coverage | area-weighted coverage | population-weighted coverage |
 |---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 1970 | 34,380 | 384 | 115 (29.9%) | 269 (70.1%) | 43 (11.2%) | 42.1% | 47.3% | 46.7% | 65.0% |
-| 1980 | 46,187 | 384 | 233 (60.7%) | 151 (39.3%) | 0 (0.0%) | 99.9% | 76.6% | 71.2% | 84.9% |
+| 1970 | 34,380 | 392 | 115 (29.3%) | 277 (70.7%) | 51 (13.0%) | 40.3% | 46.3% | 46.6% | 64.3% |
+| 1980 | 46,187 | 392 | 233 (59.4%) | 159 (40.6%) | 8 (2.0%) | 99.9% | 75.0% | 71.0% | 84.0% |
 
-The key change is that the median metro moves from only about 42% covered in 1970 to essentially fully covered in 1980. The mean remains lower than the median in 1980 because a smaller set of metros still have very poor coverage.
+The key change is that the median metro moves from only about 40% covered in 1970 to essentially fully covered in 1980. The mean remains lower than the median in 1980 because a smaller set of metros still have very poor coverage.
 
 Population-weighted coverage is higher than the plain mean in both years. That means the largest metro areas tend to be better covered than the typical metro area, though there are important exceptions such as Chicago in both years.
 
@@ -40,22 +40,22 @@ Population-weighted coverage is higher than the plain mean in both years. That m
 
 | coverage band | 1970 metro count | 1970 share | 1980 metro count | 1980 share |
 |---|---:|---:|---:|---:|
-| 0% | 43 | 11.2% | 0 | 0.0% |
-| >0% and <50% | 167 | 43.5% | 86 | 22.4% |
-| >=50% and <90% | 59 | 15.4% | 65 | 16.9% |
-| >=90% | 115 | 29.9% | 233 | 60.7% |
+| 0% | 51 | 13.0% | 8 | 2.0% |
+| >0% and <50% | 167 | 42.6% | 86 | 21.9% |
+| >=50% and <90% | 59 | 15.1% | 65 | 16.6% |
+| >=90% | 115 | 29.3% | 233 | 59.4% |
 
-In 1970, more than half of non-Puerto Rico metros are below 50% covered. By 1980, most metros clear 90%, and the number with no coverage drops to zero.
+In 1970, more than half of metros are below 50% covered. By 1980, most metros clear 90%, and the number with no coverage drops sharply.
 
 ## Threshold Comparison
 
 | threshold | 1970 metros meeting threshold | 1980 metros meeting threshold |
 |---:|---:|---:|
-| >=50% | 174 (45.3%) | 298 (77.6%) |
-| >=75% | 128 (33.3%) | 253 (65.9%) |
-| >=90% | 115 (29.9%) | 233 (60.7%) |
-| >=95% | 113 (29.4%) | 229 (59.6%) |
-| >=99% | 108 (28.1%) | 226 (58.9%) |
+| >=50% | 174 (44.4%) | 298 (76.0%) |
+| >=75% | 128 (32.7%) | 253 (64.5%) |
+| >=90% | 115 (29.3%) | 233 (59.4%) |
+| >=95% | 113 (28.8%) | 229 (58.4%) |
+| >=99% | 108 (27.6%) | 226 (57.7%) |
 
 The threshold table shows that the improvement is not just a small nudge around the 90% line. The number of metros that are at least 99% covered more than doubles from 1970 to 1980.
 
@@ -91,13 +91,27 @@ Chicago is the standout large metro that remains far below full coverage in both
 
 ## Remaining Problem Areas
 
-In 1970, 43 non-Puerto Rico metros have 0% coverage. The largest zero-coverage examples are Cape Coral-Fort Myers, FL; Clarksville, TN-KY; Barnstable Town, MA; Bellingham, WA; Burlington-South Burlington, VT; Medford, OR; Chico, CA; Johnson City, TN; Jacksonville, NC; and St. Cloud, MN.
+In 1970, 51 metros have 0% coverage. These include Puerto Rico metros and a mix of mainland metros such as Cape Coral-Fort Myers, Clarksville, Barnstable Town, Bellingham, Burlington-South Burlington, Medford, Chico, Johnson City, Jacksonville NC, and St. Cloud.
 
-In 1980, no non-Puerto Rico metro has exactly 0% coverage. However, the lowest nonzero 1980 coverage examples are still effectively uncovered for practical purposes: Homosassa Springs, FL at 0.0005%, California-Lexington Park, MD at 0.0012%, Barnstable Town, MA at 0.0033%, Sebring-Avon Park, FL at 0.0034%, and The Villages, FL at 0.0050%.
+In 1980, the 0% coverage cases are all Puerto Rico metros:
+
+| CBSA code | metro |
+|---:|---|
+| 41980 | San Juan-Bayamón-Caguas, PR |
+| 10380 | Aguadilla-Isabela, PR |
+| 38660 | Ponce, PR |
+| 11640 | Arecibo, PR |
+| 41900 | San Germán, PR |
+| 32420 | Mayagüez, PR |
+| 49500 | Yauco, PR |
+| 25020 | Guayama, PR |
+
+The lowest nonzero 1980 coverage examples are still effectively uncovered for practical purposes: Homosassa Springs, FL at 0.0005%, California-Lexington Park, MD at 0.0012%, Barnstable Town, MA at 0.0033%, Sebring-Avon Park, FL at 0.0034%, and The Villages, FL at 0.0050%.
 
 ## Takeaways
 
-1. 1970 coverage is not reliable nationally under March 2020 CBSA boundaries. Only 29.9% of non-Puerto Rico metros clear the 90% area-coverage cutoff, and 43 metros have exactly 0% coverage.
-2. 1980 is much better, but not complete. 60.7% of non-Puerto Rico metros clear the 90% cutoff, no non-Puerto Rico metros have exactly 0% coverage, and the median metro is nearly fully covered.
+1. 1970 coverage is not reliable nationally under March 2020 CBSA boundaries. Only 29.3% of metros clear the 90% area-coverage cutoff, and 51 metros have exactly 0% coverage.
+2. 1980 is much better, but not complete. 59.4% of metros clear the 90% cutoff, 8 metros have exactly 0% coverage, and the median metro is nearly fully covered.
 3. Large-metro results should not be assumed safe just because population-weighted coverage is high. Chicago remains undercovered in both 1970 and 1980.
-4. For older-year metric calculations, it may be useful to filter or flag metro-year pairs below a chosen coverage threshold before comparing segregation statistics across years.
+4. Puerto Rico metros remain uncovered in both tract years in this processed tract set.
+5. For older-year metric calculations, it may be useful to filter or flag metro-year pairs below a chosen coverage threshold before comparing segregation statistics across years.
