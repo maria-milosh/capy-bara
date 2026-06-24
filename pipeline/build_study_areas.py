@@ -1,3 +1,6 @@
+# try:
+#     from .definitions import CBSA, CBSADict
+# except ImportError:
 from definitions import CBSA, CBSADict
 
 import multiprocessing
@@ -9,20 +12,27 @@ import typer
 import geopandas as gpd
 import json
 import os
+from pathlib import Path
 
 
 def main(
-    filename: str = "configs/list1_march_2020.xls",
-    definition_tracts: str = "processed/2020_tracts.shp",
-    output_dir: str = "cbsas/defs",
+    filename: str = "study_area_sources/list1_march_2020.xls",
+    definition_geographies: str = "census_geographies/2020_tracts.shp",
+    output_dir: str = "study_areas/definitions",
+    study_area_type: str = "cbsa",
 ):
-    config_month = filename.split(".")[0].split("_")[1]
-    config_year = filename.split(".")[0].split("_")[2]
+    source_stem = Path(filename).stem
+    if study_area_type == "cbsa" and source_stem.startswith("list1_"):
+        definition_vintage = source_stem.removeprefix("list1_")
+    elif source_stem.startswith(f"{study_area_type}_"):
+        definition_vintage = source_stem.removeprefix(f"{study_area_type}_")
+    else:
+        definition_vintage = source_stem
 
     metro_areas = fetch_metro_areas(filename)
     mappings_without_pops = create_metro_mappings(metro_areas)
     # mappings_without_pops = dict(list(mappings_without_pops.items())[:3])
-    country = gpd.read_file(definition_tracts)
+    country = gpd.read_file(definition_geographies)
     country["STATEFP"] = country["STATEFP"].apply(lambda x: str(x).zfill(2))
     country["COUNTYFP"] = country["COUNTYFP"].apply(lambda x: str(x).zfill(3))
     country["STCNTYFP"] = country["STATEFP"] + country["COUNTYFP"]
@@ -36,20 +46,17 @@ def main(
     #     metros_with_pops = dict(p.imap(f, mappings_without_pops.items()))
 
     for cbsa_code, cbsa in metros.items():
+        output_stem = f"{study_area_type}_{cbsa_code}_{definition_vintage}"
         with open(
-            f"{output_dir}/{cbsa.total_population}_{cbsa_code}_{config_month}_{config_year}.json",
+            f"{output_dir}/{output_stem}.json",
             "w",
         ) as w:
             json.dump(cbsa.json(exclude={"geometry": True}), w)
 
         try:
-            cbsa.geometry.to_file(
-                f"{output_dir}/{cbsa.total_population}_{cbsa_code}_{config_month}_{config_year}.shp"
-            )
+            cbsa.geometry.to_file(f"{output_dir}/{output_stem}.shp")
         except ValueError as e:
-            print(
-                f"{output_dir}/{cbsa.total_population}_{cbsa_code}_{config_month}_{config_year}.shp"
-            )
+            print(f"{output_dir}/{output_stem}.shp")
             raise
 
 

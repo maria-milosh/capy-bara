@@ -1,16 +1,17 @@
-# Set up folder structure
-mkdir -p configs
-mkdir -p nhgis
-mkdir -p cbsas
+#!/usr/bin/env bash
 
-mkdir -p cbsas/defs
-mkdir -p cbsas/2020
-mkdir -p cbsas/2010
-mkdir -p cbsas/2000
-mkdir -p cbsas/1990
-mkdir -p cbsas/1980
-mkdir -p cbsas/1970
+# Set up folder structure
+CENSUS_GEOGRAPHY_YEARS="${CENSUS_GEOGRAPHY_YEARS:-2020 2010 2000 1990 1980 1970}"
+
+mkdir -p study_area_sources
+mkdir -p nhgis
+mkdir -p study_areas
+
+mkdir -p study_areas/definitions
+for year in ${CENSUS_GEOGRAPHY_YEARS}; do
+    mkdir -p "study_areas/${year}"
+done
 
 mkdir -p outputs
 mkdir -p figures
-mkdir -p processed
+mkdir -p census_geographies

@@ -14,11 +14,18 @@ NHGIS_MAPPINGS = {
 }
 
 
-def main():
-    shapefiles = glob.glob("nhgis/**/**.shp") #Peter: perhaps we should change recursive to true?
-    #I did this in my local version since my shapefiles were in an intermediate folder
+def parse_years(years: str) -> set[str]:
+    return {year.strip() for year in years.replace(",", " ").split() if year.strip()}
+
+
+def main(years: str = "2020 2010 2000 1990 1980 1970"):
+    configured_years = parse_years(years)
+    shapefiles = glob.glob("nhgis/**/**.shp") 
     for filename in tqdm.tqdm(glob.glob("nhgis/**/**.csv")):
         year = filename.split("_")[-2]
+        if year not in configured_years:
+            continue
+
         shapefile_matches = [x for x in shapefiles if f"tract_{year}" in x]
         assert len(shapefile_matches) == 1
 
@@ -42,7 +49,7 @@ def main():
             - merged_gdf[f"WHITE"].astype(int).sum(),
         )
 
-        merged_gdf.to_file(f"processed/{year}_tracts.shp")
+        merged_gdf.to_file(f"census_geographies/{year}_tracts.shp")
 
 
 if __name__ == "__main__":
