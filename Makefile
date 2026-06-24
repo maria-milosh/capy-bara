@@ -1,11 +1,11 @@
 .PHONY: all
 
-CHICAGO_REF := 9618502_16980_march_2020
+CHICAGO_REF := cbsa_16980_march_2020
 OUTPUT_DIR := chicago-maup
 
-../data.mggg.org/census-2020/il/il_%.shp: pipeline/overlaps.py pipeline/gen_duals.py cbsas/defs/$(CHICAGO_REF).shp
-	python3 pipeline/overlaps.py $@ "cbsas/defs/$(CHICAGO_REF).shp" $(OUTPUT_DIR) --prefix "$*_"
-	python3 pipeline/gen_duals.py $(OUTPUT_DIR)/$*_$(CHICAGO_REF)_cbsa_tracts.shp $(OUTPUT_DIR)/$*_$(CHICAGO_REF)_orig.json $(OUTPUT_DIR)/$*_$(CHICAGO_REF)_connected.json --attr GEOID20 --pop-col TOTPOP20
+../data.mggg.org/census-2020/il/il_%.shp: pipeline/overlaps.py pipeline/gen_duals.py study_areas/definitions/$(CHICAGO_REF).shp
+	python3 pipeline/overlaps.py $@ "study_areas/definitions/$(CHICAGO_REF).shp" $(OUTPUT_DIR) --prefix "$*_"
+	python3 pipeline/gen_duals.py $(OUTPUT_DIR)/$*_$(CHICAGO_REF)_geographies.shp $(OUTPUT_DIR)/$*_$(CHICAGO_REF)_orig.json $(OUTPUT_DIR)/$*_$(CHICAGO_REF)_connected.json --attr GEOID20 --pop-col TOTPOP20
 
 chicago_duals: $(wildcard ../data.mggg.org/census-2020/il/il_*.shp)
 
