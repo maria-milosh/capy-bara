@@ -10,7 +10,15 @@ It uses the existing tract network in `data/rpocessed/dual_graphs/YEAR/*_connect
 
 ## Current area of search definition
 
-They are manual for now. Cluster and core tracts are taken from `data/candidate_tracts.csv` as supplied.
+They are manual for now. Cluster and core tracts are taken from `data/candidate_tracts.csv` as supplied. It's a list of tracts chosen to be in the area, and it needs to have the following columns: 
+
+| Column | How the notebook uses it |
+|---|---|
+| `cbsa` | Groups rows by metropolitan area and locates the corresponding JSON graph (previously generated). |
+| `year` | Groups rows by census year. |
+| `cluster` | Cluster name, e.g. Hyde Park or Austin. |
+| `gisjoin` | ID that matches each selected tract to a graph node. This comes from Census. |
+| `is_core` | Core tracts or just tracts in the selected area? Values are read as true when their lowercase string is `"true"`. |
 
 ## Metrics
 
