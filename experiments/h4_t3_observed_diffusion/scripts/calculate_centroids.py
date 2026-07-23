@@ -47,8 +47,7 @@ def calculate_cluster_metrics(
     for candidate in core_nodes:
         distances = nx.single_source_shortest_path_length(graph, candidate)
         objective = sum(
-            int(graph.nodes[node]["BLACK"]) * distances[node]
-            for node in selected_nodes)
+            int(graph.nodes[node]["BLACK"]) * distances[node] for node in core_nodes)
         # The candidate tract itself contributes zero because its distance to itself is zero
         # tie_break = str(graph.nodes[candidate]["GISJOIN"])
         if best_objective is None or objective < best_objective: # (objective, tie_break) < (best_objective, str(graph.nodes[best_center]["GISJOIN"])):
