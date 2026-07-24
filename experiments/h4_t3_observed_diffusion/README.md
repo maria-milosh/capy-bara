@@ -44,5 +44,3 @@ $$
 \frac{\sum_i B_i d(i,c)}{\sum_i B_i}
 $$
 
-Membership connectivity is evaluated from actual shared tract
-borders in the GeoPackage, while distances use the connected JSON graph.
